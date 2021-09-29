@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+    <head>
+        <title> Flashcards Project</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content = "width=device-width initial scale = 1.0" />
+        <link rel = "stylesheet"  type = "text/css" href = "https://fonts.googleapis.com/css2?family=Raleway:wght@160">
+        <link href = "style.css" rel = "stylesheet">
+    </head>
+
+
+    <body>
+        <header>
+            <div class = "container">
+                <div class = "nav">
+                    <h2> Flashcards</h2>
+
+                    <div>
+                        <button onclick= "createCardbox()"> Add a new Card</button>
+                        <button onclick="deleteFlashcard()"> Delete a Card</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class = "container">
+            <div class = "flashcard-box">
+                <h2 style="text-align: center;"> New Flashcard </h2>
+                <label for="question"> Question </label>
+                <textarea id = "question"></textarea>
+                <br>
+                <label for="answer"> Answer </label>
+                <textarea id="answer"></textarea>
+                <div>
+                    <button onclick = "addFlashCard()"> Save </button>
+                    <button onclick = "hideCreateBox()"> Close </button>
+                </div>
+            </div>
+            <div class = "flashcards"></div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
