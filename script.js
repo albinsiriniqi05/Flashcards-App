@@ -1,65 +1,76 @@
-const flashcards = document.getElementsByClassName("flashcards")[0];
-const createBox = document.getElementsByClassName("flashcard-box")[0];
-const question = document.getElementById("question");
-const answer = document.getElementById("answer");
+var contentArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
-let contentArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
- 
+document.getElementById("save_card").addEventListener("click", () => {
+  addFlashcard();
+});
 
-function deleteFlashcard(){
-    localStorage.clear();
-    flashcards.innerHTML = '';
-    contentArray = [];
+document.getElementById("delete_cards").addEventListener("click", () => {
+  localStorage.clear();
+  flashcards.innerHTML = '';
+  contentArray = [];
+});
+
+document.getElementById("show_card_box").addEventListener("click", () => {
+  document.getElementById("create_card").style.display = "block";
+});
+
+document.getElementById("close_card_box").addEventListener("click", () => {
+  document.getElementById("create_card").style.display = "none";
+});
+
+flashcardMaker = (text, delThisIndex) => {
+  const flashcard = document.createElement("div");
+  const question = document.createElement('h2');
+  const answer = document.createElement('h2');
+  const del = document.createElement('i');
+
+  flashcard.className = 'flashcard';
+
+  question.setAttribute("style", "border-top:1px solid red; padding: 15px; margin-top:30px");
+  question.textContent = text.my_question;
+
+  answer.setAttribute("style", "text-align:center; display:none; color:red");
+  answer.textContent = text.my_answer;
+
+  del.className = "fa fa-window-close";
+  del.addEventListener("click", () => {
+    contentArray.splice(delThisIndex, 1);
+    localStorage.setItem('items', JSON.stringify(contentArray));
+    window.location.reload();
+
+  })
+
+
+
+  flashcard.appendChild(question);
+  flashcard.appendChild(answer);
+  flashcard.appendChild(del);
+
+  flashcard.addEventListener("click", () => {
+    if(answer.style.display == "none")
+      answer.style.display = "block";
+    else
+      answer.style.display = "none";
+  })
+
+  document.querySelector("#flashcards").appendChild(flashcard);
 }
 
-function hideCreateBox(){
-    createBox.style.display = "none";
+contentArray.forEach(flashcardMaker);
+
+addFlashcard = () => {
+  const question = document.querySelector("#question");
+  const answer = document.querySelector("#answer");
+
+  let flashcard_info = {
+    'my_question' : question.value,
+    'my_answer'  : answer.value
+  }
+
+  contentArray.push(flashcard_info);
+  localStorage.setItem('items', JSON.stringify(contentArray));
+  flashcardMaker(contentArray[contentArray.length - 1], contentArray.length - 1);
+  question.value = "";
+  answer.value = "";
 }
 
-function createCardbox(){
-    createBox.style.display = "block";
-}
-contentArray.forEach(divMaker);
-
-function divMaker(text){
-    var div = document.createElement("div");
-    var h2_question = document.createElement("h2");
-    var h2_answer = document.createElement("h2");
-
-    div.className = 'flashcard';
-
-    h2_question.setAttribute('style', "border-top: 1px solid red; padding: 15px; margin-top: 30px");
-
-    h2_question.innerHTML = text.my_question;
-
-    h2_answer.setAttribute('style', "text-align: center; display: none; color: blue");
-    h2_answer.innerHTML = text.my_answer;
-
-    div.appendChild(h2_question);
-    div.appendChild(h2_answer);
-
-    div.addEventListener("click", function(){
-        if(h2_answer.style.display == "none"){
-            h2_answer.style.display = "block";
-        }
-        else{
-            h2_answer.style.display = "none"
-        }
-    });
-
-    flashcards.appendChild(div);
-}
-
-function addFlashCard(){
-    var flashcard_info = {
-        'my_question' : question.value,
-        'my_answer' : answer.value
-    }
-
-    contentArray.push(flashcard_info);
-    localStorage.setItem('items', JSON.stringify (contentArray));
-    divMaker(contentArray[contentArray.length - 1]);
-    question.value = '';
-    answer.value = '';
-
-}

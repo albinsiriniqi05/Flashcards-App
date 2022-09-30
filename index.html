@@ -1,45 +1,53 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
-    <head>
-        <title> Flashcards Project</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content = "width=device-width initial scale = 1.0" />
-        <link rel = "stylesheet"  type = "text/css" href = "https://fonts.googleapis.com/css2?family=Raleway:wght@160">
-        <link href = "style.css" rel = "stylesheet">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/png" href="flashcard.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Flashcards</title>
+</head>
+<body>
 
-
-    <body>
-        <header>
-            <div class = "container">
-                <div class = "nav">
-                    <h2> Flashcards</h2>
-
-                    <div>
-                        <button onclick= "createCardbox()"> Add a new Card</button>
-                        <button onclick="deleteFlashcard()"> Delete a Card</button>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class = "container">
-            <div class = "flashcard-box">
-                <h2 style="text-align: center;"> New Flashcard </h2>
-                <label for="question"> Question </label>
-                <textarea id = "question"></textarea>
-                <br>
-                <label for="answer"> Answer </label>
-                <textarea id="answer"></textarea>
-                <div>
-                    <button onclick = "addFlashCard()"> Save </button>
-                    <button onclick = "hideCreateBox()"> Close </button>
-                </div>
-            </div>
-            <div class = "flashcards"></div>
+  <main>
+    
+    <header>
+      <div class="container">
+        <div id="header">
+          <h1 id = "header-title">Flashcards</h1>
+          <div>
+            <button id="show_card_box">Add Card</button>
+            <button id="delete_cards">Delete Cards</button>
+          </div>
         </div>
-        <script src="script.js"></script>
-    </body>
+      </div>
+    </header>
+    
+    <section>
+      <div class="container">
+        <div id="create_card">
+          <h2>Create Flashcard</h2>
+          <label for="question">Question</label>
+          <textarea id="question" maxlength="280"></textarea>
+          <label for="answer" maxlength="280">Answer</label>
+          <br>
+          <textarea id="answer"></textarea>
+          <div>
+            <button id="save_card">Save</button> <button id="close_card_box">Close</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div id="flashcards"></div>
+      </div>
+    </section>
+
+  </main>
+  
+  <script src="script.js"></script>
+</body>
 </html>
